@@ -71,13 +71,32 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
             });
             btnDelete.setOnClickListener(view -> {
                 int pos  = getLayoutPosition();
-                Toast.makeText(context, "" + (mUserList.get(pos).id).toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "" + (mUserList.get(pos).id).toString(), Toast.LENGTH_SHORT).show();
                 mUserList.remove(pos);
                 adapter.notifyDataSetChanged();
             });
+//            btnUpdate.setOnClickListener(view->{
+//
+//                int pos  = getLayoutPosition();
+//                int id = mUserList.get(pos).id;
+//
+////                Toast.makeText(context, "" + (mUserList.get(pos).id).toString(), Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(context, UpdateActivity.class);
+//                intent.putExtra("id", id);
+//                intent.putExtra("pos", pos);
+//                context.startActivity(intent);
+////                adapter.notifyDataSetChanged();
+//            });
 
 
         }
     }
+//    update
+//    nhấn nút update để tìm phần tử thứ mấy trong dánh sách
+//    lấy thông
+//    ném thông tin ra 1 trang khác
+//    sửa thông tin
+//    đặt lại thông tin
+
 }
 
