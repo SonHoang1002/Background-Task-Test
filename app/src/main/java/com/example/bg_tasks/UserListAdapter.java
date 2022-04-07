@@ -37,9 +37,11 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
 
         holder.tVUser.setText(mUserList.get(position).name);
-        holder.btnDelete.setOnClickListener(view -> {
-            Toast.makeText(context, "" + (mUserList.get(position).id).toString(), Toast.LENGTH_SHORT).show();
-        });
+//        holder.btnDelete.setOnClickListener(view -> {
+//            Toast.makeText(context, "" + (mUserList.get(position).id).toString(), Toast.LENGTH_SHORT).show();
+//            mUserList.remove(mUserList.get(position).id);
+//
+//        });
 
 
     }
@@ -66,6 +68,12 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
                 Intent intent = new Intent(context, SecondActivity.class);
                 intent.putExtra("id", id);
                 context.startActivity(intent);
+            });
+            btnDelete.setOnClickListener(view -> {
+                int pos  = getLayoutPosition();
+                Toast.makeText(context, "" + (mUserList.get(pos).id).toString(), Toast.LENGTH_SHORT).show();
+                mUserList.remove(pos);
+                adapter.notifyDataSetChanged();
             });
 
 
