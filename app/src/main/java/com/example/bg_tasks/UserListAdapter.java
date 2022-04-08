@@ -16,6 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserViewHolder> {
     private Context context;
     private ArrayList<User> mUserList;
@@ -71,22 +75,36 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
             });
             btnDelete.setOnClickListener(view -> {
                 int pos  = getLayoutPosition();
-//                Toast.makeText(context, "" + (mUserList.get(pos).id).toString(), Toast.LENGTH_SHORT).show();
-                mUserList.remove(pos);
-                adapter.notifyDataSetChanged();
+                int id = mUserList.get(pos).id;
+                ApiClient.getAPI().deleteUserByID(id).enqueue(new Callback<ArrayList<User>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+
+                        Toast.makeText(context, "id: "+id+" deleted", Toast.LENGTH_SHORT).show();
+                        adapter.notifyItemRemoved(pos);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+
+                    }
+                });
+//                mUserList.remove(pos);
+//                adapter.notifyDataSetChanged();
             });
-//            btnUpdate.setOnClickListener(view->{
-//
-//                int pos  = getLayoutPosition();
-//                int id = mUserList.get(pos).id;
-//
-////                Toast.makeText(context, "" + (mUserList.get(pos).id).toString(), Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(context, UpdateActivity.class);
-//                intent.putExtra("id", id);
-//                intent.putExtra("pos", pos);
-//                context.startActivity(intent);
-////                adapter.notifyDataSetChanged();
-//            });
+            btnUpdate.setOnClickListener(view->{
+
+                int pos  = getLayoutPosition();
+                int id = mUserList.get(pos).id;
+
+//                Toast.makeText(context, "" + (mUserList.get(pos).id).toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, MainActivity2.class);
+                intent.putExtra("id", id);
+                intent.putExtra("pos", pos);
+                context.startActivity(intent);
+//                adapter.notifyDataSetChanged();
+            });
 
 
         }
@@ -99,4 +117,17 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
 //    đặt lại thông tin
 
 }
-
+ // ApiClient.getAPI().getAllUsers().enqueue(new Callback<ArrayList<User>>() {
+//                            @Override
+//                            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+//                                mUserList.addAll(response.body());
+//                                adapter.notifyDataSetChanged();
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+//
+//
+//                            }
+//                        });
+//                        adapter.notifyItemRemoved(pos);
