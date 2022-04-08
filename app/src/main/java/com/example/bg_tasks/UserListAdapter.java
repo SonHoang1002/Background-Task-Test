@@ -82,16 +82,19 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserVi
 
                         Toast.makeText(context, "id: "+id+" deleted", Toast.LENGTH_SHORT).show();
                         adapter.notifyItemRemoved(pos);
-
                     }
-
                     @Override
                     public void onFailure(Call<ArrayList<User>> call, Throwable t) {
 
                     }
                 });
+
+
+                // delete user with list
 //                mUserList.remove(pos);
 //                adapter.notifyDataSetChanged();
+
+
             });
             btnUpdate.setOnClickListener(view->{
 

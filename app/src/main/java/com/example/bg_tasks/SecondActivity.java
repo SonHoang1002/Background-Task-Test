@@ -33,7 +33,7 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user = response.body();
-                tVSecond.setText("Id: " + id + "\n Name: " + user.name + " \n Email: " + user.email + "\n Gender: " + user.gender + "\n Status: " + user.status);
+                tVSecond.setText("Id: " + user.id + "\n Name: " + user.name + " \n Email: " + user.email + "\n Gender: " + user.gender + "\n Status: " + user.status);
             }
 
             @Override
